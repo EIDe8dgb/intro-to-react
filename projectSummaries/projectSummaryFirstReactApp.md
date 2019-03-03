@@ -95,7 +95,7 @@ Summary of simplest type of React app: `Greeting.html`
 </html>
 ```
 
-8. Within the component, invoke the `ReactDOM.render()` method and specify in the statement that the `render()` function will be rendered within the 'app' div:
+8. After the `Greeting` React component, invoke the `ReactDOM.render()` method and specify in the statement that the `render()` function will be rendered within the 'app' div:
 ```html
 <!DOCTYPE html>
 <html>

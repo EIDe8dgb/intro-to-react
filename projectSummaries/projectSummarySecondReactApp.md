@@ -1,7 +1,7 @@
-*Slightly more complicated React application, with the addition of props and state. Still built directly onto HTML document. Data can either be passed into a component by whatever renders it, or can be controlled within the component. Props are attributes specified at the time of calling a component. Within the component, these properties are accessed using the `this.props` keywords. These properties are passed to the Component and cannot be written to within the component, and thus are immutable. State, in contrast to props,
+*Slightly more complicated React application, with the addition of props and state. Still built directly onto HTML document. Data can either be passed into a component by whatever renders it, or can be controlled within the component. Props are attributes specified at the time of calling a component. Within the component, these properties are accessed using the `this.props` keywords. These properties are passed to the component and cannot be written to within the component, and thus are immutable. State, in contrast to props,
 is internal to and controlled by the component itself.*
 
-*Also add event handlers and their associated functions to modify state of the React component.*
+*Also will add event listeners to child components, plus their associated event-handler functions within the parent component, in order to update state being maintained by the parent component.*
 
 1. Create file called `counter.html`:
 ```
@@ -19,7 +19,7 @@ is internal to and controlled by the component itself.*
 </html>
 ```
 
-3. Add React library scripts before closing `<body>` tags, opening and closing `<script>` tags in which we'll code the React component, a `<div>` with id of `app` within `<body>
+3. Add React library scripts before closing `<body>` tags, opening and closing `<script>` tags in which we'll code the React component, and a `<div>` with id of `app` within `<body>
 ` tags to specify location rendering the component:
 ```html
 <!DOCTYPE html>
@@ -38,8 +38,7 @@ is internal to and controlled by the component itself.*
 </html>
 ```
 
-4. Within the `<script>` tags, create a new React component called `Counter`. Within the component, reference `image`, `label`, and `date` props which will be passed into the co
-mponent later on:
+4. Within the `<script>` tags, create a new React component called `Counter`. Within the component, reference `image`, `label`, and `date` props which will be passed into the component later on:
 ```html
 <!DOCTYPE html>
 <html>
@@ -59,7 +58,7 @@ mponent later on:
                     <img src={this.props.image} alt="Bloc Logo"/>
                     <h2>Current program: {this.props.label}</h2>
                     <p>Current Date: {this.props.date.toLocaleDateString()}</p>
-                    <div>
+                    </div>
                 );
             }
         }
@@ -68,7 +67,7 @@ mponent later on:
 </html>
 ```
 
-5. add a constant called `info` which declares values for`date` and `image` properties:
+5. Outside of the `Counter` component, add a constant called `info` which declares values for `date` and `image` properties:
 ```html
 <!DOCTYPE html>
 <html>
@@ -88,7 +87,7 @@ mponent later on:
                     <img src={this.props.image} alt="Bloc Logo"/>
                     <h2>Current program: {this.props.label}</h2>
                     <p>Current Date: {this.props.date.toLocaleDateString()}</p>
-                    <div>
+                    </div>
                 );
             }
         }
@@ -101,7 +100,7 @@ mponent later on:
 </html>
 ```
 
-6. add a default property value for `label` for the `Counter` component using the `.defaultProps()` method:
+6. Also outside of the `Counter` component, add a default property value for `label` for the `Counter` component using the `.defaultProps()` method:
 ```html
 <!DOCTYPE html>
 <html>
@@ -121,7 +120,7 @@ mponent later on:
                     <img src={this.props.image} alt="Bloc Logo"/>
                     <h2>Current program: {this.props.label}</h2>
                     <p>Current Date: {this.props.date.toLocaleDateString()}</p>
-                    <div>
+                    </div>
                 );
             }
         }
@@ -157,7 +156,7 @@ mponent later on:
                     <img src={this.props.image} alt="Bloc Logo"/>
                     <h2>Current program: {this.props.label}</h2>
                     <p>Current Date: {this.props.date.toLocaleDateString()}</p>
-                    <div>
+                    </div>
                 );
             }
         }
@@ -180,7 +179,7 @@ mponent later on:
 </html>
 ```
 
-8. `Counter` will hold state of a `number` with a value of 1. Add this state to the component, and access its value with an `<h3>` heading corresponding to the current week. Toadd state, create a `constructor` method within the component, and use the `this.state` keyword:
+8. `Counter` will hold state of a `number` with a value of 1. Add this state to the component, and access its value with an `<h3>` heading corresponding to the current week. To add state, create a `constructor` method within the component, and use the `this.state` keyword:
 ```html
 <!DOCTYPE html>
 <html>
@@ -205,7 +204,7 @@ mponent later on:
                     <h2>Current program: {this.props.label}</h2>
                     <h3>Current week: {this.state.number}</h3>
                     <p>Current Date: {this.props.date.toLocaleDateString()}</p>
-                    <div>
+                    </div>
                 );
             }
         }
@@ -228,7 +227,7 @@ mponent later on:
 </html>
 ```
 
-9. Create 2 new buttons to be rendered by `Counter` component. One button increments the `number` value held in state, while the second button decrements the value. Add the event handler `onClick` as attribute to each button, which takes an `increment` and `decrement` function as argument. Remember with JSX the arguments are enclosed by curly braces rather than quotation marks. Also remember the functions need to be manually bound using the `bind()` method; otherwise when passed to the functions the keyword `this` will be undefined:
+9. Create 2 new buttons to be rendered by `Counter` component. One button increments the `number` value held in state, while the second button decrements the value. Add the event listener `onClick` as an attribute to each button, which takes an `increment` and `decrement` function as its value. Remember with JSX the arguments are enclosed by curly braces rather than quotation marks. Also remember the functions need to be manually bound using the `bind()` method since we're not using arrow expressions in this example; otherwise when passed to the functions the keyword `this` will be undefined:
 ```html
 <!DOCTYPE html>
 <html>
@@ -255,7 +254,7 @@ mponent later on:
                     <button onClick={this.increment.bind(this)}>Increment</button>
                     <button onClick={this.decrement.bind(this)}>Decrement</button>
                     <p>Current Date: {this.props.date.toLocaleDateString()}</p>
-                    <div>
+                    </div>
                 );
             }
         }
@@ -279,7 +278,7 @@ mponent later on:
 </html>
 ```
 
-10. add the `increment()` and `decrement()` functions to the `Counter` component. Since these functions are being triggered by an event handler (`onClick`), each function will take `event` as its argument. Within each function, the state of `number` should be updated using the `setState()` method. Do not let the value of number be lower than 1:
+10. add the `increment()` and `decrement()` event-handler functions to the `Counter` component. Since these functions are being triggered by an event listener (`onClick`), each event-handler function will take `event` (or `e`) as its argument. Within each function, the state of `number` should be updated using the `setState()` method. Don't forget to use the `this` keyword when calling the `setState()` method. Do not let the value of number be lower than 1:
 ```html
 <!DOCTYPE html>
 <html>
@@ -303,7 +302,7 @@ mponent later on:
             }
 
             decrement(event){
-                this.setState({number: Math.max(1,this.state.number - 1)})
+                this.setState({number: Math.max(1, this.state.number - 1)})
             }
 
 
@@ -316,7 +315,7 @@ mponent later on:
                     <button onClick={this.increment.bind(this)}>Increment</button>
                     <button onClick={this.decrement.bind(this)}>Decrement</button>
                     <p>Current Date: {this.props.date.toLocaleDateString()}</p>
-                    <div>
+                    </div>
                 );
             }
         }
